@@ -17,7 +17,8 @@ const Tender = sequelize.define('tender', {
     id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
     name: {type: DataTypes.STRING, },
     Img: {type: DataTypes.STRING,},
-    description:{type: DataTypes.STRING,}
+    description:{type: DataTypes.STRING,},
+    tender_status:{type: DataTypes.STRING}, 
 })
 
 const Type_Tender = sequelize.define('type_tender', {
