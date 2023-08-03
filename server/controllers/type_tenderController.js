@@ -9,5 +9,6 @@ class Type_TenderController {
     }
 
 
+}
 
 module.exports = new Type_TenderController()
