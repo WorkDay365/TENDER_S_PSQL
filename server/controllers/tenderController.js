@@ -24,28 +24,31 @@ class TenderController {
     }
     async getAll(req, res, next) {
         try{
-        const {typeTenderId, userId} = req.query
+        const {typeTenderId, userId, limit, page} = req.query
+        page = page || 1
+        limit = limit || 9
         console.log(typeTenderId)
         console.log(userId)
+        let offset = page * limit - limit
         let tenders;
         if (!typeTenderId && !userId) {
             console.log('1')
-            tenders = await Tender.findAll()
+            tenders = await Tender.findAll({limit, offset})
             console.log('11')
         }
         if (typeTenderId && !userId) {
             console.log('2')
-            tenders = await Tender.findAll({where:{typeTenderId }})
+            tenders = await Tender.findAll({where:{typeTenderId}, limit, offset })
             console.log('22')
         }
         if (!typeTenderId && userId) {
             console.log('3')
-            tenders = await Tender.findAll({where:{userId }})
+            tenders = await Tender.findAll({where:{userId}, limit, offset })
             console.log('33')
         }
         if (!typeTenderId && userId) {
             console.log('4')
-            tenders = await Tender.findAll({where:{typeTenderId, userId }})
+            tenders = await Tender.findAll({where:{typeTenderId, userId}, limit, offset })
             console.log('44')
         }
 
