@@ -24,31 +24,32 @@ class TenderController {
     }
     async getAll(req, res, next) {
         try{
-        const {typeTenderId, userId, limit, page} = req.query
+        let {typeTenderId, userId, limit, page} = req.query
         page = page || 1
         limit = limit || 9
         console.log(typeTenderId)
         console.log(userId)
         let offset = page * limit - limit
         let tenders;
+        
         if (!typeTenderId && !userId) {
             console.log('1')
-            tenders = await Tender.findAll({limit, offset})
+            tenders = await Tender.findAndCountAll ({limit, offset})
             console.log('11')
         }
         if (typeTenderId && !userId) {
             console.log('2')
-            tenders = await Tender.findAll({where:{typeTenderId}, limit, offset })
+            tenders = await Tender.findAndCountAll({where:{typeTenderId}, limit, offset })
             console.log('22')
         }
         if (!typeTenderId && userId) {
             console.log('3')
-            tenders = await Tender.findAll({where:{userId}, limit, offset })
+            tenders = await Tender.findAndCountAll({where:{userId}, limit, offset })
             console.log('33')
         }
-        if (!typeTenderId && userId) {
+        if (typeTenderId && userId) {
             console.log('4')
-            tenders = await Tender.findAll({where:{typeTenderId, userId}, limit, offset })
+            tenders = await Tender.findAndCountAll({where:{typeTenderId, userId}, limit, offset })
             console.log('44')
         }
 
@@ -59,7 +60,15 @@ class TenderController {
     }
 
     async getOne(req, res) {
+        const {id} = req.params
+        const tender = await Tender.findOne(
+            {
+                where: {id},
 
+            },
+
+        )
+        return res.json(tender) 
     }
 }
 
