@@ -49,19 +49,16 @@ class UserController {
         const token = generateJwt(user.id, user.email, user.role)
         return res.json({token})
     }catch(e){
-        console.log('--------------------------')
-        next(ApiError.badRequest(e.message))
+       next(ApiError.badRequest(e.message))
     }
     }
 
     async check(req, res, next) {
     try{  
-        const {id} = req.query
         const token = generateJwt(req.user.id, req.user.email, req.user.role)
         return res.json({token})
     }catch(e){
-        console.log('--------------------------')
-        next(ApiError.badRequest(e.message))
+       next(ApiError.badRequest(e.message))
     }
     }
 }
