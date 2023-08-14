@@ -11,7 +11,8 @@ import Container from "react-bootstrap/Container";
 
 const NavBar = observer(() => {
     const {user} = useContext(Context)
-   
+    const history = useHistory()
+
   //   const logOut = () => {
   //     user.setUser({})
   //     user.setIsAuth(false)
@@ -20,14 +21,18 @@ const NavBar = observer(() => {
     return (
         <Navbar bg="dark" data-bs-theme="dark">
         <Container>
-          <NavLink style ={{color:'white'}} to={TENDERUA_ROUTE}>Trend UA</NavLink>
+          <NavLink style ={{color:'white'}} to={TENDERUA_ROUTE}>Trender UA</NavLink>
           { user.isAuth ? 
-          <Nav className="me-auto" style ={{color:'white'}}>
+          <Nav className="ml-auto" style ={{color:'white'}}>
             <Button variant= {'outline-light'}>Адмін панель</Button>
-            <Button variant= {'outline-light'} className='ml-2'>Вийти</Button>
+            <Button
+                            variant={"outline-light"}
+                      //      onClick={() => logOut()}
+                            className="ml-4"
+                        >Вийти</Button>
           </Nav>
           :
-          <Nav className="me-auto" style ={{color:'white'}}>
+          <Nav className="ml-auto" style ={{color:'white'}}>
              <Button variant={'outline-light'} onClick={() => user.setIsAuth(true)}>Авторизація</Button>
           </Nav>
           }
