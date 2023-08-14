@@ -21,7 +21,7 @@ const NavBar = observer(() => {
         <Navbar bg="dark" data-bs-theme="dark">
         <Container>
           <NavLink style ={{color:'white'}} to={TENDERUA_ROUTE}>Trend UA</NavLink>
-          {user.isAuth ? 
+          { user.isAuth ? 
           <Nav className="me-auto" style ={{color:'white'}}>
             <Button variant= {'outline-light'}>Адмін панель</Button>
             <Button variant= {'outline-light'} className='ml-2'>Вийти</Button>
