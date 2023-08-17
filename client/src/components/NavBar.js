@@ -3,11 +3,11 @@ import {Context} from "../index";
 import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav"
 import { NavLink, useHistory } from 'react-router-dom';
-import { TENDERUA_ROUTE } from '../utils/consts';
+import { ADMIN_ROUTE, LOGIN_ROUTE, TENDERUA_ROUTE, TEST_ROUTE } from '../utils/consts';
 import {Button} from "react-bootstrap";
 import { observer } from 'mobx-react-lite';
 import Container from "react-bootstrap/Container";
-//import {useHistory} from 'react-router-dom'
+
 
 const NavBar = observer(() => {
     const {user} = useContext(Context)
@@ -22,18 +22,32 @@ const NavBar = observer(() => {
         <Navbar bg="dark" data-bs-theme="dark">
         <Container>
           <NavLink style ={{color:'white'}} to={TENDERUA_ROUTE}>Trender UA</NavLink>
+          <NavLink style ={{color:'white'}} to={TEST_ROUTE}>TEST</NavLink>
           { user.isAuth ? 
           <Nav className="ml-auto" style ={{color:'white'}}>
-            <Button variant= {'outline-light'}>Адмін панель</Button>
+            <Button 
+                variant= {'outline-light'}
+                onClick={()=> history.push(ADMIN_ROUTE)}
+            >
+              Адмін панель
+            </Button>
             <Button
-                            variant={"outline-light"}
+                variant={"outline-light"}
                       //      onClick={() => logOut()}
-                            className="ml-4"
-                        >Вийти</Button>
+                onClick={()=> history.push(LOGIN_ROUTE)}
+                className="ml-4"
+
+            >
+                          Вийти
+            </Button>
           </Nav>
           :
           <Nav className="ml-auto" style ={{color:'white'}}>
-             <Button variant={'outline-light'} onClick={() => user.setIsAuth(true)}>Авторизація</Button>
+             <Button 
+                variant={'outline-light'} 
+                onClick={() => user.setIsAuth(true)}
+             >Авторизація
+             </Button>
           </Nav>
           }
         </Container>

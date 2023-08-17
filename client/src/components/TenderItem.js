@@ -9,7 +9,7 @@ const DeviceItem = ({tender}) => {
     const history = useHistory()
     return (
         <Col md={3} className={"mt-3"} onClick={() => history.push(TENDER_ROUTE + '/' + tender.id)}>
-            <Card style={{width: 150, cursor: 'pointer'}} border={"light"}>
+            <Card style={{width:150, cursor: 'pointer'}} border={"light"}>
                 <Image width={150} height={150} src={tender.img}/> 
                 {/* src={process.env.REACT_APP_API_URL + tender.img}/> */}
                 <div className="text-black-50 mt-1 d-flex justify-content-between align-items-center">

@@ -3,7 +3,8 @@ import Auth from './pages/Auth'
 import Cabinet from './pages/Cabinet'
 import Tender from './pages/Tender'
 import TenderUA from './pages/TenderUA'
-import {ADMIN_ROUTE, CABINET_ROUTE, LOGIN_ROUTE, REGISTRATION_ROUTE, TENDERUA_ROUTE, TENDER_ROUTE} from "./utils/consts"
+import Test from './pages/test'
+import {TEST_ROUTE, ADMIN_ROUTE, CABINET_ROUTE, LOGIN_ROUTE, REGISTRATION_ROUTE, TENDERUA_ROUTE, TENDER_ROUTE} from "./utils/consts"
 
 
 
@@ -22,6 +23,10 @@ export const publicRoutes = [
     {
         path: TENDERUA_ROUTE,
         Component: TenderUA
+    },
+    {
+        path: TEST_ROUTE,
+        Component: Test
     },
     {
         path: LOGIN_ROUTE,
