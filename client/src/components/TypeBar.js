@@ -16,7 +16,6 @@ const TypeBar = observer(() => {
                     style={{cursor: 'pointer'}}
                     active = {typeTender.id === tender.selectedTypeTender.id}
                     onClick={() => tender.setSelectedTypeTender(typeTender)}
-                  //  onClick={() => tender.setSelectedTypesTender(types)}
                     key={typeTender.id}
                  >
                     {typeTender.title}

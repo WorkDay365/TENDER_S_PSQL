@@ -11,13 +11,7 @@ const Tender = () => {
 
     console.log(process.env.REACT_APP_API_URL);   
     console.log(process.env.REACT_APP_API_URL);   
-    const description = [
-                {id:1, title: 'херня', description: '65hfh'},
-                {id:2, title: 'хеgffdgрня', description: '53453'},
-                {id:3, title: 'хеdfgdfрня', description: '56756'},
-                {id:4, title: 'хdfgd', description: 'ghjtyjut'},
-                {id:5, title: 'dfghdfgre', description: 'ghhgjghjh'},
-    ]
+    const description = []
     const params = useParams()
     const {id} = useParams()
     console.log(params)

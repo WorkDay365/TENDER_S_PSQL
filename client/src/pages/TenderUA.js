@@ -6,7 +6,7 @@ import TypeBar from "../components/TypeBar";
 import TenderList from "../components/TenderList";
 import { observer } from "mobx-react-lite";
 import { Context } from "../index";
-import  {fetchTypesTender, fetchTenders}  from "../http/tenderAPI";
+import { fetchTypesTender, fetchTenders } from "../http/tenderAPI";
 
 const TenderUA = observer(() => {
   const { tender } = useContext(Context);
@@ -14,14 +14,14 @@ const TenderUA = observer(() => {
   useEffect(() => {
     fetchTypesTender().then((data) => tender.setTypesTender(data));
     fetchTenders().then((data) => tender.setTender(data.rows));
-  },[])  
+  }, []);
   return (
     <Container>
       <Row className="mt-2">
         <Col md={3}>
           <TypeBar />
         </Col>
-        <Col md={9}>
+        <Col md={1}>
           {/* <BrandBar/> */}
           <TenderList />
           {/* //   <Pages/> */}

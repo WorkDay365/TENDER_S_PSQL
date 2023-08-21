@@ -22,7 +22,9 @@ const CreateTender = observer(({ show, onHide }) => {
   const [price, setPrice] = useState(0);
   const [file, setFile] = useState(null);
   const [info, setInfo] = useState([]);
+  const [tender_description, setDescription] = useState("");
 
+ 
 
       useEffect(() => {
           fetchTypesTender().then(data => tender.setTypesTender(data))
@@ -48,16 +50,32 @@ const CreateTender = observer(({ show, onHide }) => {
         console.log(info)
         console.log(name)
         console.log(price)
-     
-
+        console.log(tender.selectedTypeTender.id)
+      // *******************
+      // name, tender_description, tender_status , userId, typeTenderId, img:fileName
+      //******************* */
           const formData = new FormData()
           formData.append('name', name)
-          formData.append('price', `${price}`)
+          formData.append('tender_description', tender_description)
+          formData.append('tender_status', price)
+          formData.append('userId', 6)
+          formData.append('typeTenderId', tender.selectedTypeTender.id)
           formData.append('img', file)
-          // formData.append('brandId', tender.selectedBrand.id)
-          formData.append('typeId', tender.selectedTypeTender.id)
-          formData.append('info', JSON.stringify(info))
-          createTender(formData).then(data => onHide())
+        //  formData.append('tender_description', tender.selectedTypeTender.id)
+        //  formData.append('info', JSON.stringify(info))
+// 
+// const addDevice = () => {
+//   const formData = new FormData()
+//   formData.append('name', name)
+//   formData.append('price', `${price}`)
+//   formData.append('img', file)
+//   formData.append('brandId', device.selectedBrand.id)
+//   formData.append('typeId', device.selectedType.id)
+//   formData.append('info', JSON.stringify(info))
+//   createDevice(formData).then(data => onHide())
+// }
+// // 
+       createTender(formData).then(data => onHide())
       }
 
   return (
@@ -94,25 +112,25 @@ const CreateTender = observer(({ show, onHide }) => {
                        onChange={e => setName(e.target.value)}
                        placeholder={"Введіть назву тендера"}
           />
-          {/* <Form.Control
-            // value={name}
-            // onChange={(e) => setName(e.target.value)}
-            className="mt-3"
-            placeholder="Введіть опис тендера"
-          /> */}
-          <div className="mt-3">
+          <Form.Control
+          className="mt-3"
+             value={tender_description}
+             onChange={(e) => setDescription(e.target.value)}
+             placeholder="Введіть опис тендера"
+          />
+          {/* <div className="mt-3">
             <textarea
               placeholder="Введіть опис тендера"
               class="form-control"
               rows="7"
             ></textarea>
-          </div>
+          </div> */}
           <Form.Control
             value={price}
             onChange={(e) => setPrice(Number(e.target.value))}
             className="mt-3"
             placeholder="Введить приблизну вартість тендера, грн"
-            type="number"
+          //  type="number"
           />
           <div className="mt-3">Введить бажану дату початку робіт:</div>
           <Form.Control

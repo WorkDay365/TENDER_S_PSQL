@@ -6,19 +6,35 @@ const ApiError = require('../error/ApiError')
 class TenderController {
 
     async create(req, res, next) {
-        try{
+        console.log('CreateTender ')
+       // console.log(req )
+        console.log('*********************' )
+        //console.log(res )
+        console.log('******************' )
+       
+        console.log('CreateTender try')
         const {name, tender_description, tender_status, userId, typeTenderId } = req.body
+        console.log(name, tender_description, tender_status, userId, typeTenderId  )
         const {img} = req.files
         let fileName = uuid.v4() + ".jpg"
   
          img.mv(path.resolve(__dirname, '..', 'static', fileName))
-
-        const device = await Tender.create({name, tender_description, tender_status , userId, typeTenderId, img:fileName}) //
+         
+         try{
+        const tender = await Tender.create({name, tender_description, tender_status , userId, typeTenderId, img:fileName}) //
   
-
-        return res.json(device)
+        const  tt_tt =  res.json(tender)
+        console.log('--------------------')  
+        console.log(tt_tt)  
+        console.log('--------------------')   
+        return res.json(tender)
 
     }catch(e){
+        console.log('CreateTender error')
+     //   console.log(req )
+        console.log('*********************' )
+      //  console.log(res )
+        console.log('******************' )
         next(ApiError.badRequest(e.message))
     }
     }

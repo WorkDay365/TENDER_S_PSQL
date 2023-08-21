@@ -26,7 +26,7 @@ export const createTender = async (tender) => {
   return data;
 };
 
-export const fetchTenders = async (typeId, page, limit = 5) => {
+export const fetchTenders = async (typeId, page, limit = 12) => {
   const { data } = await $host.get("api/tender", {
     params: {
       typeId,
@@ -41,4 +41,3 @@ export const fetchOneTender = async (id) => {
   const { data } = await $host.get("api/tender/" + id);
   return data;
 };
-
