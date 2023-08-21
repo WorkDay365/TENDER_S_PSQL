@@ -21,25 +21,24 @@ export const fetchTypesTender = async () => {
 //     return data
 // }
 
-// export const createTender = async (tender) => {
-//   const { data } = await $authHost.post("api/tender", tender);
-//   return data;
-// };
+export const createTender = async (tender) => {
+  const { data } = await $authHost.post("api/tender", tender);
+  return data;
+};
 
-// export const fetchTenders = async (typeId, page, limit = 5) => {
-//   const { data } = await $host.get("api/tender", {
-//     params: {
-//       typeId,
-//       page,
-//       limit,
-//     },
-//   });
-//   return data;
-// };
+export const fetchTenders = async (typeId, page, limit = 5) => {
+  const { data } = await $host.get("api/tender", {
+    params: {
+      typeId,
+      page,
+      limit,
+    },
+  });
+  return data;
+};
 
-// export const fetchOneTender = async (id) => {
-//   const { data } = await $host.get("api/tender/" + id);
-//   return data;
-// };
+export const fetchOneTender = async (id) => {
+  const { data } = await $host.get("api/tender/" + id);
+  return data;
+};
 
-//export default FetchTypesTender

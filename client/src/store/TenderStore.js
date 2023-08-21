@@ -32,7 +32,7 @@ export default class TenderStore {
     this._typesTender = typesTender;
   }
 
-  setTenderes(tenders) {
+  setTender(tenders) {
     this._tenders = tenders;
   }
 
