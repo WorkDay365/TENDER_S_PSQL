@@ -11,7 +11,8 @@ import {
   div,
 } from "react-bootstrap";
 import { Context } from "../../index";
-//import {createTender, fetchBrands, fetchTenders, fetchTypesTender} from "../../http/tenderAPI";
+
+import {createTender, fetchTenders, fetchTypesTender} from "../../http/tenderAPI";
 import { observer } from "mobx-react-lite";
 import myUKR from "./myUKR.css";
 
@@ -22,40 +23,48 @@ const CreateTender = observer(({ show, onHide }) => {
   const [file, setFile] = useState(null);
   const [info, setInfo] = useState([]);
 
-  //     useEffect(() => {
-  //       //  fetchTypesTender().then(data => tender.setTypesTender(data))
-  //      //   fetchBrands().then(data => device.setBrands(data))
-  //     }, [])
 
-  //     const addInfo = () => {
-  //         setInfo([...info, {title: '', description: '', number: Date.now()}])
-  //     }
-  //     const removeInfo = (number) => {
-  //         setInfo(info.filter(i => i.number !== number))
-  //     }
-  //     const changeInfo = (key, value, number) => {
-  //         setInfo(info.map(i => i.number === number ? {...i, [key]: value} : i))
-  //     }
+      useEffect(() => {
+          fetchTypesTender().then(data => tender.setTypesTender(data))
+            //   fetchBrands().then(data => device.setBrands(data))
+      }, [])
 
-  //     const selectFile = e => {
-  //         setFile(e.target.files[0])
-  //     }
+      const addInfo = () => {
+         setInfo([...info, {title: '', description: '', number: Date.now()}])
+      }
+      const removeInfo = (number) => {
+          setInfo(info.filter(i => i.number !== number))
+      }
+      const changeInfo = (key, value, number) => {
+          setInfo(info.map(i => i.number === number ? {...i, [key]: value} : i))
+      }
 
-  //     const addTender = () => {
-  //         const formData = new FormData()
-  //         formData.append('name', name)
-  //         formData.append('price', `${price}`)
-  //         formData.append('img', file)
-  //         formData.append('brandId', tender.selectedBrand.id)
-  //         formData.append('typeId', tender.selectedTypeTender.id)
-  //         formData.append('info', JSON.stringify(info))
-  //   //      createTender(formData).then(data => onHide())
-  //     }
+      const selectFile = e => {
+        console.log(e.target.files)
+        setFile(e.target.files[0])
+      }
+ 
+      const addTender = () => {
+        console.log(info)
+        console.log(name)
+        console.log(price)
+     
+
+          // const formData = new FormData()
+          // formData.append('name', name)
+          // formData.append('price', `${price}`)
+          // formData.append('img', file)
+          // formData.append('brandId', tender.selectedBrand.id)
+          // formData.append('typeId', tender.selectedTypeTender.id)
+          // formData.append('info', JSON.stringify(info))
+          // createTender(formData).then(data => onHide())
+      }
 
   return (
     // <div>
     //     CreateTender
     // </div>
+      //'tender.selectedTypesTender.title' ||
 
     <Modal show={show} onHide={onHide} centered>
       <Modal.Header closeButton>
@@ -66,20 +75,24 @@ const CreateTender = observer(({ show, onHide }) => {
       <Modal.Body>
         <Form>
           <Dropdown СlassName="mt-2 mb-2">
-            <Dropdown.Toggle>Виберить тип тендера</Dropdown.Toggle>
+            <Dropdown.Toggle>{tender.selectedTypeTender.title ||"Виберить тип тендера"}</Dropdown.Toggle>
             <Dropdown.Menu>
-              {tender.typesTender.map((typesTender) => (
-                <Dropdown.Item key={typesTender.id}>
-                  {typesTender.title}
+              {tender.typesTender.map((typeTender) => (
+                <Dropdown.Item 
+                onClick={() => tender.setSelectedTypeTender(typeTender)}
+                key={typeTender.id}>   
+
+                               {typeTender.title}
+                
                 </Dropdown.Item>
               ))}
             </Dropdown.Menu>
           </Dropdown>
           <Form.Control
             className="mt-3"
-            //           value={value}
-            //           onChange={e => setValue(e.target.value)}
-            placeholder={"Введіть назву тендера"}
+                       value={name}
+                       onChange={e => setName(e.target.value)}
+                       placeholder={"Введіть назву тендера"}
           />
           {/* <Form.Control
             // value={name}
@@ -95,8 +108,8 @@ const CreateTender = observer(({ show, onHide }) => {
             ></textarea>
           </div>
           <Form.Control
-            // value={price}
-            // onChange={(e) => setPrice(Number(e.target.value))}
+            value={price}
+            onChange={(e) => setPrice(Number(e.target.value))}
             className="mt-3"
             placeholder="Введить приблизну вартість тендера, грн"
             type="number"
@@ -130,7 +143,7 @@ const CreateTender = observer(({ show, onHide }) => {
           <Form.Control
             className="mt-3 ButtonInputUKR"
             type="file"
-            //   onChange={selectFile}
+            onChange={selectFile}
           />
         </Form>
       </Modal.Body>
@@ -138,7 +151,7 @@ const CreateTender = observer(({ show, onHide }) => {
         <Button variant="outline-danger" onClick={onHide}>
           Закрити
         </Button>
-        {/* <Button variant="outline-success" onClick={addType}>Добавить</Button> */}
+        <Button variant="outline-success" onClick={addTender}>Додати</Button>
       </Modal.Footer>
     </Modal>
   );
