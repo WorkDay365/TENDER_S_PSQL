@@ -50,14 +50,14 @@ const CreateTender = observer(({ show, onHide }) => {
         console.log(price)
      
 
-          // const formData = new FormData()
-          // formData.append('name', name)
-          // formData.append('price', `${price}`)
-          // formData.append('img', file)
+          const formData = new FormData()
+          formData.append('name', name)
+          formData.append('price', `${price}`)
+          formData.append('img', file)
           // formData.append('brandId', tender.selectedBrand.id)
-          // formData.append('typeId', tender.selectedTypeTender.id)
-          // formData.append('info', JSON.stringify(info))
-          // createTender(formData).then(data => onHide())
+          formData.append('typeId', tender.selectedTypeTender.id)
+          formData.append('info', JSON.stringify(info))
+          createTender(formData).then(data => onHide())
       }
 
   return (

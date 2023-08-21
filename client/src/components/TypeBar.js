@@ -11,14 +11,15 @@ const TypeBar = observer(() => {
 
     <ListGroup>
         
-       {tender.typesTender.map(types =>
+       {tender.typesTender.map(typeTender =>
                 <ListGroup.Item
                     style={{cursor: 'pointer'}}
-                    active = {types.id === tender.selectedTypesTender.id}
-                    onClick={() => tender.setSelectedTypesTender(types)}
-                    key={types.id}
+                    active = {typeTender.id === tender.selectedTypeTender.id}
+                    onClick={() => tender.setSelectedTypeTender(typeTender)}
+                  //  onClick={() => tender.setSelectedTypesTender(types)}
+                    key={typeTender.id}
                  >
-                    {types.title}
+                    {typeTender.title}
                 </ListGroup.Item>
             )}
     </ListGroup>
