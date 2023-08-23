@@ -1,9 +1,20 @@
 import React, { useContext, useEffect, useState } from "react";
 import Modal from "react-bootstrap/Modal";
-import { Button, Dropdown, Form, Row, Col } from "react-bootstrap";
+import {
+  Button,
+  Dropdown,
+  Form,
+  Row,
+  Col,
+  label,
+  input,
+  div,
+} from "react-bootstrap";
 import { Context } from "../../index";
-//import {createTender, fetchBrands, fetchTenders, fetchTypesTender} from "../../http/tenderAPI";
+
+import {createTender, fetchTenders, fetchTypesTender} from "../../http/tenderAPI";
 import { observer } from "mobx-react-lite";
+import myUKR from "./myUKR.css";
 
 const CreateTender = observer(({ show, onHide }) => {
   const { tender } = useContext(Context);
@@ -11,161 +22,156 @@ const CreateTender = observer(({ show, onHide }) => {
   const [price, setPrice] = useState(0);
   const [file, setFile] = useState(null);
   const [info, setInfo] = useState([]);
+  const [tender_description, setDescription] = useState("");
 
-  //     useEffect(() => {
-  //       //  fetchTypesTender().then(data => tender.setTypesTender(data))
-  //      //   fetchBrands().then(data => device.setBrands(data))
-  //     }, [])
+ 
 
-  //     const addInfo = () => {
-  //         setInfo([...info, {title: '', description: '', number: Date.now()}])
-  //     }
-  //     const removeInfo = (number) => {
-  //         setInfo(info.filter(i => i.number !== number))
-  //     }
-  //     const changeInfo = (key, value, number) => {
-  //         setInfo(info.map(i => i.number === number ? {...i, [key]: value} : i))
-  //     }
+      useEffect(() => {
+          fetchTypesTender().then(data => tender.setTypesTender(data))
+            //   fetchBrands().then(data => device.setBrands(data))
+      }, [])
 
-  //     const selectFile = e => {
-  //         setFile(e.target.files[0])
-  //     }
+      const addInfo = () => {
+         setInfo([...info, {title: '', description: '', number: Date.now()}])
+      }
+      const removeInfo = (number) => {
+          setInfo(info.filter(i => i.number !== number))
+      }
+      const changeInfo = (key, value, number) => {
+          setInfo(info.map(i => i.number === number ? {...i, [key]: value} : i))
+      }
 
-  //     const addTender = () => {
-  //         const formData = new FormData()
-  //         formData.append('name', name)
-  //         formData.append('price', `${price}`)
-  //         formData.append('img', file)
-  //         formData.append('brandId', tender.selectedBrand.id)
-  //         formData.append('typeId', tender.selectedTypeTender.id)
-  //         formData.append('info', JSON.stringify(info))
-  //   //      createTender(formData).then(data => onHide())
-  //     }
+      const selectFile = e => {
+        console.log(e.target.files)
+        setFile(e.target.files[0])
+      }
+ 
+      const addTender = () => {
+        console.log(info)
+        console.log(name)
+        console.log(price)
+        console.log(tender.selectedTypeTender.id)
+      // *******************
+      // name, tender_description, tender_status , userId, typeTenderId, img:fileName
+      //******************* */
+          const formData = new FormData()
+          formData.append('name', name)
+          formData.append('tender_description', tender_description)
+          formData.append('tender_status', price)
+          formData.append('userId', 6)
+          formData.append('typeTenderId', tender.selectedTypeTender.id)
+          formData.append('img', file)
+        //  formData.append('tender_description', tender.selectedTypeTender.id)
+        //  formData.append('info', JSON.stringify(info))
+// 
+// const addDevice = () => {
+//   const formData = new FormData()
+//   formData.append('name', name)
+//   formData.append('price', `${price}`)
+//   formData.append('img', file)
+//   formData.append('brandId', device.selectedBrand.id)
+//   formData.append('typeId', device.selectedType.id)
+//   formData.append('info', JSON.stringify(info))
+//   createDevice(formData).then(data => onHide())
+// }
+// // 
+       createTender(formData).then(data => onHide())
+      }
 
   return (
     // <div>
     //     CreateTender
     // </div>
+      //'tender.selectedTypesTender.title' ||
 
     <Modal show={show} onHide={onHide} centered>
       <Modal.Header closeButton>
         <Modal.Title id="contained-modal-title-vcenter">
-          Добавити тип тендера
+          Додати тендер
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
         <Form>
+          <Dropdown СlassName="mt-2 mb-2">
+            <Dropdown.Toggle>{tender.selectedTypeTender.title ||"Виберить тип тендера"}</Dropdown.Toggle>
+            <Dropdown.Menu>
+              {tender.typesTender.map((typeTender) => (
+                <Dropdown.Item 
+                onClick={() => tender.setSelectedTypeTender(typeTender)}
+                key={typeTender.id}>   
+
+                               {typeTender.title}
+                
+                </Dropdown.Item>
+              ))}
+            </Dropdown.Menu>
+          </Dropdown>
           <Form.Control
-            //           value={value}
-            //           onChange={e => setValue(e.target.value)}
-            placeholder={"Введіть назву типу"}
+            className="mt-3"
+                       value={name}
+                       onChange={e => setName(e.target.value)}
+                       placeholder={"Введіть назву тендера"}
+          />
+          <Form.Control
+          className="mt-3"
+             value={tender_description}
+             onChange={(e) => setDescription(e.target.value)}
+             placeholder="Введіть опис тендера"
+          />
+          {/* <div className="mt-3">
+            <textarea
+              placeholder="Введіть опис тендера"
+              class="form-control"
+              rows="7"
+            ></textarea>
+          </div> */}
+          <Form.Control
+            value={price}
+            onChange={(e) => setPrice(Number(e.target.value))}
+            className="mt-3"
+            placeholder="Введить приблизну вартість тендера, грн"
+          //  type="number"
+          />
+          <div className="mt-3">Введить бажану дату початку робіт:</div>
+          <Form.Control
+            // value={price}
+            // onChange={(e) => setPrice(Number(e.target.value))}
+            className="mt-1"
+            placeholder="Введить бажану дату початку робіт"
+            type="date"
+          />
+          <div className="mt-3">Введить бажану дату закінчення робіт:</div>
+
+          <Form.Control
+            // value={price}
+            // onChange={(e) => setPrice(Number(e.target.value))}
+            className="mt-1"
+            placeholder="Введить бажану дату закінчення робіт"
+            type="date"
+          />
+
+          <Form.Control
+            // value={price}
+            // onChange={(e) => setPrice(Number(e.target.value))}
+            className="mt-3"
+            placeholder="Введить область, де треба виконати роботу"
+            //  type="number"
+          />
+
+          <Form.Control
+            className="mt-3 ButtonInputUKR"
+            type="file"
+            onChange={selectFile}
           />
         </Form>
       </Modal.Body>
       <Modal.Footer>
         <Button variant="outline-danger" onClick={onHide}>
-          Закрыть
+          Закрити
         </Button>
-        {/* <Button variant="outline-success" onClick={addType}>Добавить</Button> */}
+        <Button variant="outline-success" onClick={addTender}>Додати</Button>
       </Modal.Footer>
     </Modal>
-
-    //     <Modal
-    //         show={show}
-    //         onHide={onHide}
-    //         centered
-    //     >
-    //         <Modal.Header closeButton>
-    //             <Modal.Title id="contained-modal-title-vcenter">
-    //                 Додати тендер
-    //             </Modal.Title>
-    //         </Modal.Header>
-    //         <Modal.Body>
-    //             <Form>
-    //                 <Dropdown className="mt-2 mb-2">
-    //                     <Dropdown.Toggle>{tender.selectedType.name || "Виберить тип"}</Dropdown.Toggle>
-    //                     <Dropdown.Menu>
-    //                         {tender.types.map(type =>
-    //                             <Dropdown.Item
-    //                                 onClick={() => tender.setSelectedType(type)}
-    //                                 key={type.id}
-    //                             >
-    //                                 {type.name}
-    //                             </Dropdown.Item>
-    //                         )}
-    //                     </Dropdown.Menu>
-    //                 </Dropdown>
-    //                 <Dropdown className="mt-2 mb-2">
-    //                     <Dropdown.Toggle>{tender.selectedBrand.name || "Виберить тип"}</Dropdown.Toggle>
-    //                     <Dropdown.Menu>
-    //                         {/* {tender.brands.map(brand =>
-    //                             <Dropdown.Item
-    //                                 onClick={() => tender.setSelectedBrand(brand)}
-    //                                 key={brand.id}
-    //                             >
-    //                                 {brand.name}
-    //                             </Dropdown.Item>
-    //                         )} */}
-    //                     </Dropdown.Menu>
-    //                 </Dropdown>
-    //                 <Form.Control
-    //                     value={name}
-    //                     onChange={e => setName(e.target.value)}
-    //                     className="mt-3"
-    //                     placeholder="Введите название устройства"
-    //                 />
-    //                 <Form.Control
-    //                     value={price}
-    //                     onChange={e => setPrice(Number(e.target.value))}
-    //                     className="mt-3"
-    //                     placeholder="Введите стоимость устройства"
-    //                     type="number"
-    //                 />
-    //                 <Form.Control
-    //                     className="mt-3"
-    //                     type="file"
-    //                     onChange={selectFile}
-    //                 />
-    //                 <hr/>
-    //                 <Button
-    //                     variant={"outline-dark"}
-    //                     onClick={addInfo}
-    //                 >
-    //                     Добавить новое свойство
-    //                 </Button>
-    //                 {info.map(i =>
-    //                     <Row className="mt-4" key={i.number}>
-    //                         <Col md={4}>
-    //                             <Form.Control
-    //                                 value={i.title}
-    //                                 onChange={(e) => changeInfo('title', e.target.value, i.number)}
-    //                                 placeholder="Введите название свойства"
-    //                             />
-    //                         </Col>
-    //                         <Col md={4}>
-    //                             <Form.Control
-    //                                 value={i.description}
-    //                                 onChange={(e) => changeInfo('description', e.target.value, i.number)}
-    //                                 placeholder="Введите описание свойства"
-    //                             />
-    //                         </Col>
-    //                         <Col md={4}>
-    //                             <Button
-    //                                 onClick={() => removeInfo(i.number)}
-    //                                 variant={"outline-danger"}
-    //                             >
-    //                                 Видалити
-    //                             </Button>
-    //                         </Col>
-    //                     </Row>
-    //                 )}
-    //             </Form>
-    //         </Modal.Body>
-    //         <Modal.Footer>
-    //             <Button variant="outline-danger" onClick={onHide}>Закрити</Button>
-    //             <Button variant="outline-success" onClick={addTender}>Додати</Button>
-    //         </Modal.Footer>
-    //     </Modal>
   );
 });
 

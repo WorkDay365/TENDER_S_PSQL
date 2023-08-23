@@ -1,18 +1,18 @@
 import React, {useState} from 'react';
 import Modal from "react-bootstrap/Modal";
 import {Form, Button} from "react-bootstrap";
-// import {createType} from "../../http/deviceAPI";
+import {createTypeTender} from "../../http/tenderAPI";
 
 const CreateTypeTender = ({show, onHide}) => {
     const [value, setValue] = useState('')
 
-    const addType = () => {
-        // createType({name: value}).then(data => {
-        //     setValue('')
-        //     onHide()
-        // })
+    const addTypeTender = () => {
+        createTypeTender({title: value}).then(data => {
+            setValue('')
+            onHide()
+        })
     }
-
+    
     return (
         <Modal
             show={show}
@@ -34,8 +34,8 @@ const CreateTypeTender = ({show, onHide}) => {
                 </Form>
             </Modal.Body>
             <Modal.Footer>
-                <Button variant="outline-danger" onClick={onHide}>Закрыть</Button>
-                <Button variant="outline-success" onClick={addType}>Добавить</Button>
+                <Button variant="outline-danger" onClick={onHide}>Закрити</Button>
+                <Button variant="outline-success" onClick={addTypeTender}>Додати</Button>
             </Modal.Footer>
         </Modal>
     );
