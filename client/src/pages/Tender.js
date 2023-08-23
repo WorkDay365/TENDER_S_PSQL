@@ -10,12 +10,16 @@ const Tender = () => {
 
   const params = useParams();
   const { id } = useParams();
+<<<<<<< HEAD
+  //
+=======
   console.log(params);
   console.log(id);
 
   console.log(setTender);
   console.log(tender);
   console.log("");
+>>>>>>> 08464826d22b788e2d02e56689258fe75486562f
   useEffect(() => {
     fetchOneTender(id).then((data) => setTender(data));
   }, []);
