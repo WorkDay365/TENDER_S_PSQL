@@ -14,29 +14,27 @@ const DeviceItem = ({ tender }) => {
       onClick={() => history.push(TENDER_ROUTE + "/" + tender.id)}
     >
       <Card style={{ width: 150, cursor: "pointer" }} border={"light"}>
-        <tr>
-          <td>
-            <div>
-              <Image
-                width={150}
-                height={150}
-                src={process.env.REACT_APP_API_URL + tender.img}
-              />
-              <div className="text-black-50 mt-1 d-flex justify-content-between align-items-center">
-                {/* <div>Samsung...</div> */}
-                <div className="d-flex align-items-center">
-                  <div>{tender.rating}</div>
-                  <Image width={18} height={18} src={star} />
-                </div>
+        <div>
+          <div>
+            <Image
+              width={150}
+              height={150}
+              src={process.env.REACT_APP_API_URL + tender.img}
+            />
+            <div className="text-black-50 mt-1 d-flex justify-content-between align-items-center">
+              <div className="d-flex align-items-center">
+                <div>{tender.rating}</div>
+                <Image width={18} height={18} src={star} />
               </div>
-              <div>{tender.name}</div>
             </div>
-            {/* <div>dfgfdgdfgdfgdfgdfg</div> */}
-          </td>
-          <td>
-            <div>{tender.tender_description}</div>
-          </td>
-        </tr>
+            <div>{tender.name}</div>
+          </div>
+
+          <div>{tender.tender_description}</div>
+        </div>
+
+        {/* </td>
+        </tr> */}
       </Card>
     </Col>
   );

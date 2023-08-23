@@ -14,7 +14,7 @@ const TenderUA = observer(() => {
 
   useEffect(() => {
     fetchTypesTender().then((data) => tender.setTypesTender(data));
-    fetchTenders(null, 1, 3).then((data) => {
+    fetchTenders(null, 1, 4).then((data) => {
       // tender.setTender(data.rows));
       tender.setTender(data.rows);
       tender.setTotalCount(data.count);
