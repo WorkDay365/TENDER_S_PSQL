@@ -5,6 +5,11 @@ export default class TenderStore {
     this._typesTender = [];
     this._tenders = [];
     this._selectedTypeTender = {};
+
+    this._page = 1;
+    this._totalCount = 0;
+    this._limit = 3;
+
     makeAutoObservable(this);
   }
 
@@ -17,7 +22,15 @@ export default class TenderStore {
   }
 
   setSelectedTypeTender(typeTender) {
+    this.setPage(1);
     this._selectedTypeTender = typeTender;
+  }
+
+  setPage(page) {
+    this._page = page;
+  }
+  setTotalCount(count) {
+    this._totalCount = count;
   }
 
   get typesTender() {
@@ -30,5 +43,15 @@ export default class TenderStore {
 
   get selectedTypeTender() {
     return this._selectedTypeTender;
+  }
+
+  get totalCount() {
+    return this._totalCount;
+  }
+  get page() {
+    return this._page;
+  }
+  get limit() {
+    return this._limit;
   }
 }

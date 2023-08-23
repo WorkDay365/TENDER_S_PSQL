@@ -26,14 +26,22 @@ export const createTender = async (tender) => {
   return data;
 };
 
-export const fetchTenders = async (typeId, page, limit = 12) => {
+export const fetchTenders = async (typeTenderId, page, limit = 3) => {
   const { data } = await $host.get("api/tender", {
     params: {
-      typeId,
+      typeTenderId,
       page,
       limit,
     },
   });
+  console.log("88888888888888888888888888");
+
+  console.log(data);
+  console.log("111111111111111111111111");
+  console.log(typeTenderId);
+  console.log(page);
+  console.log(limit);
+  console.log("--------------------------");
   return data;
 };
 
