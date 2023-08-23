@@ -6,20 +6,10 @@ import { fetchOneTender } from "../http/tenderAPI";
 
 const Tender = () => {
   const [tender, setTender] = useState({ info: [] });
-  //   {id: 1, name: "BBB_72",   img: "093a65c5-13f8-4dc7-9e5f-7f9a477fc70d.jpg"	,tender_description: "ghdfhggfhfhd",  tender_status: 7,	userId: 2,	typeTenderId: 2}
 
   const params = useParams();
   const { id } = useParams();
-<<<<<<< HEAD
-  //
-=======
-  console.log(params);
-  console.log(id);
 
-  console.log(setTender);
-  console.log(tender);
-  console.log("");
->>>>>>> 08464826d22b788e2d02e56689258fe75486562f
   useEffect(() => {
     fetchOneTender(id).then((data) => setTender(data));
   }, []);

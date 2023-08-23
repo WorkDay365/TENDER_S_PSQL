@@ -26,7 +26,7 @@ const NavBar = observer(() => {
     <Navbar bg="dark" data-bs-theme="dark">
       <Container>
         <NavLink style={{ color: "white" }} to={TENDERUA_ROUTE}>
-          Trender UA v.0.7.2
+          Trender UA v.0.7.4
         </NavLink>
         <NavLink style={{ color: "white" }} to={TEST_ROUTE}>
           TEST
