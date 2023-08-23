@@ -34,14 +34,7 @@ export const fetchTenders = async (typeTenderId, page, limit = 3) => {
       limit,
     },
   });
-  console.log("88888888888888888888888888");
 
-  console.log(data);
-  console.log("111111111111111111111111");
-  console.log(typeTenderId);
-  console.log(page);
-  console.log(limit);
-  console.log("--------------------------");
   return data;
 };
 

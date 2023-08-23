@@ -32,8 +32,8 @@ class TenderController {
     try {
       let { typeTenderId, userId, limit, page } = req.query;
       page = page || 1;
-      limit = limit || 9;
-      console.log(userId);
+      limit = limit || 12;
+
       let offset = page * limit - limit;
       let tenders;
 
