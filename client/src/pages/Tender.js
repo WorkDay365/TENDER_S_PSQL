@@ -49,7 +49,7 @@ const Tender = () => {
           // style={{width: 300, height: 300, fontSize: 32, border: '5px solid lightgray'}}
           >
             {/* <h3>От: {tender.price} руб.</h3> */}
-            <h3>Від: 200 000 грн.</h3>
+            {/* <h3>Від: 200 000 грн.</h3> */}
             <Button variant={"outline-dark"}>Додати в кабінет</Button>
           </Card>
         </Col>
