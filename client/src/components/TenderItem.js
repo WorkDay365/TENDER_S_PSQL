@@ -32,9 +32,6 @@ const DeviceItem = ({ tender }) => {
 
           <div>{tender.tender_description}</div>
         </div>
-
-        {/* </td>
-        </tr> */}
       </Card>
     </Col>
   );

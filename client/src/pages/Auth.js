@@ -12,6 +12,7 @@ import {
 import { login, registration } from "../http/userAPI";
 import { observer } from "mobx-react-lite";
 import { Context } from "../index";
+import NavBar from "../components/NavBar";
 
 const Auth = observer(() => {
   const { user } = useContext(Context);
@@ -19,25 +20,32 @@ const Auth = observer(() => {
   const history = useHistory();
   const isLogin = location.pathname === LOGIN_ROUTE;
   const [email, setEmail] = useState("");
+  const [emailRezerv, setEmailRezerv] = useState("");
   const [password, setPassword] = useState("");
+  const [passwordSecond, setPasswordSecond] = useState("");
 
   const click = async () => {
     try {
       let data;
+      console.log("fddf");
       if (isLogin) {
         data = await login(email, password);
       } else {
-        data = await registration(email, password);
+        data = await registration(email, emailRezerv, password, passwordSecond);
       }
       console.log(data);
       user.setUser(user);
       user.setIsAuth(true);
+      console.log("TENDERUA_ROUTE ", TENDERUA_ROUTE);
       history.push(TENDERUA_ROUTE);
     } catch (e) {
-      alert(e.response.data.message);
+      alert(e.response);
+      // alert(e.response.data.message);
+      // console.log("e.response.data.message ", e.response.data.message);
     }
   };
-
+  console.log("user ", user);
+  console.log("isLogin ", isLogin);
   return (
     <Container
       className="d-flex justify-content-center align-items-center"
@@ -52,6 +60,17 @@ const Auth = observer(() => {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
+          {!isLogin ? (
+            <Form.Control
+              className="mt-3"
+              placeholder="Введіть вашу пошту..."
+              value={emailRezerv}
+              onChange={(e) => setEmailRezerv(e.target.value)}
+              isLogin={false}
+            />
+          ) : (
+            <></>
+          )}
           <Form.Control
             className="mt-3"
             placeholder="Введіть Ваш пароль..."
@@ -59,6 +78,17 @@ const Auth = observer(() => {
             onChange={(e) => setPassword(e.target.value)}
             type="password"
           />
+          {!isLogin ? (
+            <Form.Control
+              className="mt-3"
+              placeholder="Введіть Ваш пароль повторно..."
+              value={passwordSecond}
+              onChange={(e) => setPasswordSecond(e.target.value)}
+              type="password"
+            />
+          ) : (
+            <></>
+          )}
           <Row className="d-flex justify-content-between mt-3 pl-3 pr-3">
             {isLogin ? (
               <div>

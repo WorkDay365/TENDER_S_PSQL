@@ -11,7 +11,7 @@ const generateJwt = (id, email, role) => {
 class UserController {
   async registration(req, res, next) {
     const { email, password, role } = req.body;
-    console.log("++++++++++++++++++++++");
+    console.log("1111111++++++++++++++++++++++");
     console.log(email);
     try {
       if (!email || !password) {
@@ -29,8 +29,9 @@ class UserController {
       const token = generateJwt(user.id, user.email, user.role);
       return res.json({ token });
     } catch (e) {
-      console.log("--------------------------");
-      next(ApiError.badRequest(e.message));
+      console.log("111111111--------------------------");
+      console.log(e);
+      //next(ApiError.badRequest(e.message));
     }
   }
 
@@ -38,6 +39,8 @@ class UserController {
     try {
       const { email, password } = req.body;
       const user = await User.findOne({ where: { email } });
+      console.log("222222222222222222++++++++++++++++++++++");
+      console.log(email);
       if (!user) {
         return next(ApiError.internal("Користувач не знвйден"));
       }
@@ -48,7 +51,9 @@ class UserController {
       const token = generateJwt(user.id, user.email, user.role);
       return res.json({ token });
     } catch (e) {
-      next(ApiError.badRequest(e.message));
+      console.log("2222222222222----------------------");
+      console.log(e);
+      // next(ApiError.badRequest(e.message));
     }
   }
 

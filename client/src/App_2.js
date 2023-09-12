@@ -7,8 +7,9 @@ import { observer } from "mobx-react-lite";
 import { Context } from ".";
 import { check } from "./http/userAPI";
 import { Spinner } from "react-bootstrap";
+import Enter from "./components/Enter";
 
-const App = observer(() => {
+const App_2 = observer(() => {
   const { user } = useContext(Context);
   const [loading, setLoading] = useState(true);
 
@@ -26,13 +27,14 @@ const App = observer(() => {
   if (loading) {
     return <Spinner animation={"grow"} />;
   }
-
+  console.log("user ", user);
   return (
     <BrowserRouter>
-      <NavBar />
-      <AppRouter />
+      <NavBar user={false} />
+      <AppRouter_First />
+      {/* <Enter /> */}
     </BrowserRouter>
   );
 });
 
-export default App;
+export default App_2;

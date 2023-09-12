@@ -1,5 +1,6 @@
 import React, { createContext } from "react";
 import ReactDOM from "react-dom";
+import App_2 from "./App_2";
 import App from "./App";
 import UserStore from "./store/UserStore";
 import TenderStore from "./store/TenderStore";
@@ -15,7 +16,7 @@ ReactDOM.render(
       tender: new TenderStore(),
     }}
   >
-    <App />
+    <App_2 />
   </Context.Provider>,
   document.getElementById("root")
 );

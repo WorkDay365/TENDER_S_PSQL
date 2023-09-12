@@ -13,27 +13,26 @@ import { Button } from "react-bootstrap";
 import { observer } from "mobx-react-lite";
 import Container from "react-bootstrap/Container";
 
-const NavBar = observer(() => {
+const Enter = observer(() => {
   const { user } = useContext(Context);
   const history = useHistory();
 
   const logOut = () => {
     user.setUser({});
     user.setIsAuth(false);
-    localStorage.clear();
   };
 
   return (
-    <Navbar bg="dark" data-bs-theme="dark">
-      <Container>
-        <NavLink style={{ color: "white" }} to={TENDERUA_ROUTE}>
-          Trender UA v.0.8.1
+    <Container>
+      <Navbar bg="dark" data-bs-theme="dark">
+        <NavLink style={{ color: "indigo" }} to={TENDERUA_ROUTE}>
+          Trender UA v.7.7.4
         </NavLink>
-        <NavLink style={{ color: "white" }} to={TEST_ROUTE}>
+        <NavLink style={{ color: "indigo" }} to={TEST_ROUTE}>
           TEST
         </NavLink>
         {user.isAuth ? (
-          <Nav className="ml-auto" style={{ color: "white" }}>
+          <Nav className="ml-auto" style={{ color: "indigo" }}>
             <Button
               variant={"outline-light"}
               onClick={() => history.push(ADMIN_ROUTE)}
@@ -50,7 +49,7 @@ const NavBar = observer(() => {
             </Button>
           </Nav>
         ) : (
-          <Nav className="ml-auto" style={{ color: "white" }}>
+          <Nav className="ml-auto" style={{ color: "indigo" }}>
             <Button
               variant={"outline-light"}
               onClick={() => history.push(LOGIN_ROUTE)}
@@ -60,9 +59,9 @@ const NavBar = observer(() => {
             </Button>
           </Nav>
         )}
-      </Container>
-    </Navbar>
+      </Navbar>
+    </Container>
   );
 });
 
-export default NavBar;
+export default Enter;
