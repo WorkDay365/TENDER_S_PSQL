@@ -31,7 +31,7 @@ const TenderUA = observer(() => {
 
   return (
     <Container>
-      <NavBar />
+      {/* <NavBar /> */}
       <Row className="mt-2">
         <Col md={3}>
           <TypeBar />

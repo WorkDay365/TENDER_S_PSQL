@@ -4,6 +4,7 @@ import Cabinet from "./pages/Cabinet";
 import Tender from "./pages/Tender";
 import TenderUA from "./pages/TenderUA";
 import Test from "./pages/test";
+import Settings from "./pages/Settings";
 import {
   TEST_ROUTE,
   ADMIN_ROUTE,
@@ -12,7 +13,12 @@ import {
   REGISTRATION_ROUTE,
   TENDERUA_ROUTE,
   TENDER_ROUTE,
+  SETTINGS_ROUTE,
+  CREATED_ROUTE,
+  SELECTED_ROUTE,
 } from "./utils/consts";
+import Created from "./pages/Created";
+import Selected from "./pages/Selected";
 
 export const authRoutes = [
   {
@@ -30,6 +36,18 @@ export const authRoutes = [
   {
     path: TENDERUA_ROUTE,
     Component: TenderUA,
+  },
+  {
+    path: SETTINGS_ROUTE,
+    Component: Settings,
+  },
+  {
+    path: CREATED_ROUTE,
+    Component: Created,
+  },
+  {
+    path: SELECTED_ROUTE,
+    Component: Selected,
   },
 ];
 

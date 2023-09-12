@@ -29,7 +29,7 @@ const App = observer(() => {
 
   return (
     <BrowserRouter>
-      {/* <NavBar user={true} /> */}
+      <NavBar user={true} />
       <AppRouter />
     </BrowserRouter>
   );
