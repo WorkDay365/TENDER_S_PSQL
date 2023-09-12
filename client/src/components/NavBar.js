@@ -20,6 +20,9 @@ const NavBar = observer(() => {
   const logOut = () => {
     user.setUser({});
     user.setIsAuth(false);
+    localStorage.clear();
+    window.location.reload(true);
+    history.push(TEST_ROUTE);
   };
 
   return (

@@ -25,10 +25,11 @@ const App = observer(() => {
   if (loading) {
     return <Spinner animation={"grow"} />;
   }
+  console.log("user ", user);
 
   return (
     <BrowserRouter>
-      <NavBar />
+      {/* <NavBar user={true} /> */}
       <AppRouter />
     </BrowserRouter>
   );
