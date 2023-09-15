@@ -5,6 +5,8 @@ import Tender from "./pages/Tender";
 import TenderUA from "./pages/TenderUA";
 import Test from "./pages/test";
 import Settings from "./pages/Settings";
+import Created from "./pages/Created";
+import Selected from "./pages/Selected";
 import {
   TEST_ROUTE,
   ADMIN_ROUTE,
@@ -17,8 +19,6 @@ import {
   CREATED_ROUTE,
   SELECTED_ROUTE,
 } from "./utils/consts";
-import Created from "./pages/Created";
-import Selected from "./pages/Selected";
 
 export const authRoutes = [
   {

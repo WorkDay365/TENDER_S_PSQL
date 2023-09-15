@@ -3,11 +3,13 @@ import { Button, Container } from "react-bootstrap";
 //import CreateBrand from "../components/modals/CreateBrand";
 import CreateTender from "../components/modals/CreateTender";
 import CreateTypeTender from "../components/modals/CreateTypeTender";
+import CreateSubTypeTender from "../components/modals/CreateSubTypeTender";
 
 const Admin = () => {
   // const [brandVisible, setBrandVisible] = useState(false)
   const [typeTenderVisible, setTypeTenderVisible] = useState(false);
   const [tenderVisible, setTenderVisible] = useState(false);
+  const [subTypeTenderVisible, setSubTypeTenderVisible] = useState(false);
 
   return (
     <Container className="d-flex flex-column">
@@ -22,9 +24,9 @@ const Admin = () => {
       <Button
         variant={"outline-dark"}
         className="mt-4 p-2"
-        // onClick={() => setBrandVisible(true)}
+        onClick={() => setSubTypeTenderVisible(true)}
       >
-        Додати ...
+        Додати піддип тендера
       </Button>
       <Button
         variant={"outline-dark"}
@@ -33,7 +35,10 @@ const Admin = () => {
       >
         Додати тендер
       </Button>
-      {/* <CreateBrand show={brandVisible} onHide={() => setBrandVisible(false)}/>*/}
+      <CreateSubTypeTender
+        show={subTypeTenderVisible}
+        onHide={() => setSubTypeTenderVisible(false)}
+      />
       <CreateTender
         show={tenderVisible}
         onHide={() => setTenderVisible(false)}

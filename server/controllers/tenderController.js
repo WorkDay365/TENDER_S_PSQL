@@ -5,8 +5,14 @@ const ApiError = require("../error/ApiError");
 
 class TenderController {
   async create(req, res, next) {
-    const { name, tender_description, tender_status, userId, typeTenderId } =
-      req.body;
+    const {
+      name,
+      tender_description,
+      tender_status,
+      userId,
+      typeTenderId,
+      subTypeTenderId,
+    } = req.body;
 
     try {
       const { img } = req.files;
@@ -20,11 +26,20 @@ class TenderController {
         tender_status,
         userId,
         typeTenderId,
+        subTypeTenderId,
         img: fileName,
       }); //
+      console.log("[[[[[[[[[[[[[[[[[");
+      console.log(tender);
+      console.log("[[[[[[[[[[[[[[[[[");
 
       return res.json(tender);
     } catch (e) {
+      console.log("[[[[[[[[[[[[[[[[[");
+      console.log("!!!!!!!!!!!!!!!!!!!!!!!");
+      console.log(req);
+      console.log("[[[[[[[[[[[[[[[[[");
+
       next(ApiError.badRequest(e.message));
     }
   }
