@@ -10,9 +10,16 @@ const generateJwt = (id, email, role) => {
 };
 class UserController {
   async registration(req, res, next) {
-    const { email, password, role } = req.body;
-    console.log("++++++++++++++++++++++");
-    console.log(email);
+    const { email, password, role, emailReserv } = req.body;
+    console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!  registration req.body");
+    console.log(req.body);
+    console.log("!!!!!!!!!!!!!!!!!!!!!!!!");
+    console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!  res");
+    console.log(res);
+    console.log("!!!!!!!!!!!!!!!!!!!!!!!!");
+    console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!  next");
+    console.log(next);
+    console.log("!!!!!!!!!!!!!!!!!!!!!!!!");
     try {
       if (!email || !password) {
         return next(ApiError.badRequest("Не коректний логін чи пароль"));
@@ -24,12 +31,17 @@ class UserController {
         );
       }
       const hashPassword = await bcrypt.hash(password, 5);
-      const user = await User.create({ email, role, password: hashPassword });
+      const user = await User.create({
+        email,
+        role,
+        password: hashPassword,
+        emailReserv,
+      });
       const cabinet = await Cabinet.create({ userId: user.id });
       const token = generateJwt(user.id, user.email, user.role);
       return res.json({ token });
     } catch (e) {
-      console.log("--------------------------");
+      console.log("");
       next(ApiError.badRequest(e.message));
     }
   }
@@ -38,6 +50,10 @@ class UserController {
     try {
       const { email, password } = req.body;
       const user = await User.findOne({ where: { email } });
+
+      console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!  login req.body");
+      console.log(req.body);
+      console.log("!!!!!!!!!!!!!!!!!!!!!!!!");
       if (!user) {
         return next(ApiError.internal("Користувач не знвйден"));
       }

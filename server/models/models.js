@@ -6,6 +6,8 @@ const User = sequelize.define("user", {
   email: { type: DataTypes.STRING, unique: true },
   password: { type: DataTypes.STRING },
   role: { type: DataTypes.STRING, defaultValue: "USER" },
+  emailReserv: { type: DataTypes.STRING },
+  owner: { type: DataTypes.INTEGER },
 });
 
 const Cabinet = sequelize.define("cabinet", {
