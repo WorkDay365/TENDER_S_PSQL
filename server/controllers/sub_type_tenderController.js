@@ -3,10 +3,11 @@ const ApiError = require("../error/ApiError");
 class Sub_Type_TenderController {
   async create(req, res, next) {
     try {
-      const { title, sub_type_description } = req.body;
+      const { title, sub_type_description, typeTenderId } = req.body;
       const sub_type_tender = await Sub_Type_Tender.create({
         title,
         sub_type_description,
+        typeTenderId,
       });
       console.log("000  0000");
       console.log(title);
@@ -19,10 +20,15 @@ class Sub_Type_TenderController {
     }
   }
 
-  async getAll(req, res) {
-    const sub_type_tender = await Sub_Type_Tender.findAll();
-    console.log("000 ");
-    return res.json(sub_type_tender);
+  async getAll(req, res, next) {
+    try {
+      let { typeTenderId, userId, limit, page } = req.query;
+      const sub_type_tender = await Sub_Type_Tender.findAll();
+      console.log("000 11");
+      return res.json(sub_type_tender);
+    } catch (e) {
+      next(ApiError.badRequest(e.message));
+    }
   }
 }
 
