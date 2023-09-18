@@ -16,9 +16,11 @@ import {
   createTender,
   fetchTenders,
   fetchTypesTender,
+  fetchSubTypesTender,
 } from "../../http/tenderAPI";
 import { observer } from "mobx-react-lite";
 import myUKR from "./myUKR.css";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 const CreateTender = observer(({ show, onHide }) => {
   const { tender } = useContext(Context);
@@ -27,14 +29,23 @@ const CreateTender = observer(({ show, onHide }) => {
   const [file, setFile] = useState(null);
   const [info, setInfo] = useState([]);
   const [tender_description, setDescription] = useState("");
+  const [typeTender, setTypeTender] = useState("");
+  const [SubTypeTender, setSubTypeTender] = useState("");
 
   useEffect(() => {
     fetchTypesTender().then((data) => tender.setTypesTender(data));
-    //   fetchBrands().then(data => device.setBrands(data))
+    const formData = new FormData();
+    formData.append("typeTenderId", typeTender.id);
+    fetchSubTypesTender(formData).then((data) =>
+      tender.setSubTypesTender(data)
+    );
   }, []);
 
   const addInfo = () => {
-    setInfo([...info, { title: "", description: "", number: Date.now() }]);
+    setInfo([
+      ...info,
+      { title: "", description: "", coast: "", number: Date.now() },
+    ]);
   };
   const removeInfo = (number) => {
     setInfo(info.filter((i) => i.number !== number));
@@ -54,7 +65,7 @@ const CreateTender = observer(({ show, onHide }) => {
     console.log(info);
     console.log(name);
     console.log(price);
-    console.log(tender.selectedTypeTender.id);
+    console.log(typeTender.id);
     // *******************
     // name, tender_description, tender_status , userId, typeTenderId, img:fileName
     //******************* */
@@ -64,33 +75,22 @@ const CreateTender = observer(({ show, onHide }) => {
     formData.append("tender_status", price);
     formData.append("userId", 6);
     formData.append("typeTenderId", tender.selectedTypeTender.id);
-    formData.append("subTypeTenderId", 1);
+    formData.append("subTypeTenderId", tender.selectedSubTypeTender.id);
     formData.append("img", file);
+    formData.append("info", JSON.stringify(info));
 
-    //  formData.append('tender_description', tender.selectedTypeTender.id)
-    //  formData.append('info', JSON.stringify(info))
-    //
-    // const addDevice = () => {
-    //   const formData = new FormData()
-    //   formData.append('name', name)
-    //   formData.append('price', `${price}`)
-    //   formData.append('img', file)
-    //   formData.append('brandId', device.selectedBrand.id)
-    //   formData.append('typeId', device.selectedType.id)
-    //   formData.append('info', JSON.stringify(info))
-    //   createDevice(formData).then(data => onHide())
-    // }
-    // //
     createTender(formData).then((data) => onHide());
   };
 
   return (
-    // <div>
-    //     CreateTender
-    // </div>
-    //'tender.selectedTypesTender.title' ||
-
-    <Modal show={show} onHide={onHide} centered>
+    <Modal
+      show={show}
+      fullscreen={true}
+      data-target=".bd-example-modal-lg"
+      onHide={onHide}
+      centered
+      className="full-screenable-node"
+    >
       <Modal.Header closeButton>
         <Modal.Title id="contained-modal-title-vcenter">
           Додати тендер
@@ -109,6 +109,22 @@ const CreateTender = observer(({ show, onHide }) => {
                   key={typeTender.id}
                 >
                   {typeTender.title}
+                </Dropdown.Item>
+              ))}
+            </Dropdown.Menu>
+          </Dropdown>
+          <></>
+          <Dropdown СlassName="mt-2 mb-2">
+            <Dropdown.Toggle className="mt-3">
+              {tender.selectedSubTypeTender.title || "Виберить підтип тендера"}
+            </Dropdown.Toggle>
+            <Dropdown.Menu>
+              {tender.subTypesTender.map((subTypeTender) => (
+                <Dropdown.Item
+                  onClick={() => tender.setSelectedSubTypeTender(subTypeTender)}
+                  key={subTypeTender.id}
+                >
+                  {subTypeTender.title}
                 </Dropdown.Item>
               ))}
             </Dropdown.Menu>
@@ -170,6 +186,47 @@ const CreateTender = observer(({ show, onHide }) => {
             type="file"
             onChange={selectFile}
           />
+          <hr />
+          <Button variant={"outline-dark"} onClick={addInfo}>
+            Додати опис робіт
+          </Button>
+          {info.map((i) => (
+            <Row className="mt-4" key={i.number}>
+              {/* <Col md={4}> */}
+              <Form.Control
+                value={i.title}
+                onChange={(e) => changeInfo("title", e.target.value, i.number)}
+                placeholder="Введить опис роботи"
+              />
+              {/* </Col> */}
+              {/* <Col md={4}> */}
+              <Form.Control
+                value={i.description}
+                onChange={(e) =>
+                  changeInfo("description", e.target.value, i.number)
+                }
+                placeholder="Введить об'єм робіт ( шт, кг, м.п. тощо ) "
+              />
+              {/* </Col> */}
+              {/* <Col md={4}> */}
+              <Form.Control
+                value={i.coast}
+                onChange={(e) => changeInfo("coast", e.target.value, i.number)}
+                placeholder="Введить приблизну вартість роботи"
+              />
+              {/* </Col> */}
+
+              {/* <Col md={4}> */}
+              <Button
+                className="mt-3"
+                onClick={() => removeInfo(i.number)}
+                variant={"outline-danger"}
+              >
+                Удалить
+              </Button>
+              {/* </Col> */}
+            </Row>
+          ))}
         </Form>
       </Modal.Body>
       <Modal.Footer>

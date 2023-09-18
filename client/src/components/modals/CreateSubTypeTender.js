@@ -61,8 +61,7 @@ const CreateSubTypeTender = observer(({ show, onHide }) => {
     // formData.append("userId", 6);
     formData.append("typeTenderId", tender.selectedTypeTender.id);
     // formData.append("img", file);
-    console.log("++++ sub");
-    console.log(formData);
+
     createSubTypeTender(formData).then((data) => onHide());
   };
 

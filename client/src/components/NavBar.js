@@ -36,7 +36,7 @@ const NavBar = observer(() => {
           </NavLink>
 
           <NavLink style={{ color: "white" }} to={TENDERUA_ROUTE}>
-            Trender UA v.0.8.3
+            Trender UA v.0.8.18
           </NavLink>
           <Nav className="ml-auto" style={{ color: "white" }}>
             <Button

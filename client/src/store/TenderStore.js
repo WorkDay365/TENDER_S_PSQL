@@ -6,6 +6,9 @@ export default class TenderStore {
     this._tenders = [];
     this._selectedTypeTender = {};
 
+    this._subTypesTender = [];
+    this._selectedSubTypeTender = {};
+
     this._page = 1;
     this._totalCount = 0;
     this._limit = 3;
@@ -17,6 +20,10 @@ export default class TenderStore {
     this._typesTender = typesTender;
   }
 
+  setSubTypesTender(subTypesTender) {
+    this._subTypesTender = subTypesTender;
+  }
+
   setTender(tenders) {
     this._tenders = tenders;
   }
@@ -24,6 +31,11 @@ export default class TenderStore {
   setSelectedTypeTender(typeTender) {
     this.setPage(1);
     this._selectedTypeTender = typeTender;
+  }
+
+  setSelectedSubTypeTender(subTypeTender) {
+    this.setPage(1);
+    this._selectedSubTypeTender = subTypeTender;
   }
 
   setPage(page) {
@@ -37,12 +49,20 @@ export default class TenderStore {
     return this._typesTender;
   }
 
+  get subTypesTender() {
+    return this._subTypesTender;
+  }
+
   get tenders() {
     return this._tenders;
   }
 
   get selectedTypeTender() {
     return this._selectedTypeTender;
+  }
+
+  get selectedSubTypeTender() {
+    return this._selectedSubTypeTender;
   }
 
   get totalCount() {
@@ -55,3 +75,7 @@ export default class TenderStore {
     return this._limit;
   }
 }
+
+// setSubTypesTender
+// setSelectedSubTypeTender
+// fetchBrandsSubTypesTender
