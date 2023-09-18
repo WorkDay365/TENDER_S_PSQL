@@ -1,6 +1,6 @@
 const uuid = require("uuid");
 const path = require("path");
-const { Tender } = require("../models/models");
+const { Tender, Tender_Works } = require("../models/models");
 const ApiError = require("../error/ApiError");
 
 class TenderController {
@@ -12,6 +12,7 @@ class TenderController {
       userId,
       typeTenderId,
       subTypeTenderId,
+      info,
     } = req.body;
 
     try {
@@ -29,16 +30,28 @@ class TenderController {
         subTypeTenderId,
         img: fileName,
       }); //
-      console.log("[[[[[[[[[[[[[[[[[");
-      console.log(tender);
-      console.log("[[[[[[[[[[[[[[[[[");
+
+      console.log(info);
+      if (info) {
+        const infoParse = JSON.parse(info);
+        console.log("infoParse   ", infoParse);
+
+        infoParse.forEach((i) =>
+          //console.log(i)
+          Tender_Works.create({
+            title: i.title,
+            description: i.description,
+            tenderId: tender.id,
+            coast: i.coast,
+          })
+        );
+      }
 
       return res.json(tender);
     } catch (e) {
-      console.log("[[[[[[[[[[[[[[[[[");
-      console.log("!!!!!!!!!!!!!!!!!!!!!!!");
-      console.log(req);
-      console.log("[[[[[[[[[[[[[[[[[");
+      console.log("================   ERRROORRR   ===========");
+      console.log(info);
+      console.log("=================    tender");
 
       next(ApiError.badRequest(e.message));
     }

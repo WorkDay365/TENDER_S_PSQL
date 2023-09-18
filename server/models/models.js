@@ -19,9 +19,9 @@ const Cabinet = sequelize.define("cabinet", {
 const Tender = sequelize.define("tender", {
   id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
   name: { type: DataTypes.STRING },
-  img: { type: DataTypes.STRING },
-  tender_description: { type: DataTypes.STRING },
-  tender_status: { type: DataTypes.STRING },
+  img: { type: DataTypes.STRING, allowNull: true },
+  tender_description: { type: DataTypes.STRING, allowNull: true },
+  tender_status: { type: DataTypes.STRING, allowNull: true },
 });
 
 const Type_Tender = sequelize.define("type_tender", {
@@ -34,6 +34,13 @@ const Sub_Type_Tender = sequelize.define("sub_type_tender", {
   id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
   title: { type: DataTypes.STRING },
   type_descript: { type: DataTypes.STRING },
+});
+
+const Tender_Works = sequelize.define("tender_works", {
+  id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
+  title: { type: DataTypes.STRING, allowNull: false }, // allowNull: false
+  description: { type: DataTypes.STRING, allowNull: false }, //, allowNull: false
+  coast: { type: DataTypes.STRING, allowNull: false },
 });
 
 User.hasOne(Cabinet);
@@ -51,10 +58,14 @@ Tender.belongsTo(Sub_Type_Tender);
 Type_Tender.hasMany(Sub_Type_Tender);
 Sub_Type_Tender.belongsTo(Type_Tender);
 
+Tender.hasMany(Tender_Works, { as: "info" });
+Tender_Works.belongsTo(Tender);
+
 module.exports = {
   User,
   Cabinet,
   Tender,
   Type_Tender,
   Sub_Type_Tender,
+  Tender_Works,
 };
