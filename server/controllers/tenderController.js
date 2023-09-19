@@ -100,6 +100,7 @@ class TenderController {
     const { id } = req.params;
     const tender = await Tender.findOne({
       where: { id },
+      include: [{ model: Tender_Works, as: "info" }],
     });
     return res.json(tender);
   }
