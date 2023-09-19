@@ -6,23 +6,29 @@ export const createTypeTender = async (type) => {
   return data;
 };
 
-export const fetchTypesTender = async () => {
-  const { data } = await $host.get("api/type_tender"); //type_tender  //typeTender
+export const fetchTypesTender = async (type) => {
+  const { data } = await $host.get("api/type_tender"); //type_tender
   return data;
 };
 
-// export const createBrand = async (brand) => {
-//     const {data} = await $authHost.post('api/brand', brand)
-//     return data
-// }
+export const createSubTypeTender = async (sub_type) => {
+  console.log("sub_types  sub type ", sub_type);
+  const { data } = await $authHost.post("api/sub_type_tender", sub_type);
+  return data;
+};
 
-// export const fetchBrands = async () => {
-//     const {data} = await $host.get('api/brand', )
-//     return data
-// }
+export const fetchSubTypesTender = async (typeTenderId) => {
+  const { data } = await $host.get("api/sub_type_tender", {
+    params: {
+      typeTenderId,
+    },
+  }); //sub_type_tender
+  return data;
+};
 
 export const createTender = async (tender) => {
   const { data } = await $authHost.post("api/tender", tender);
+
   return data;
 };
 

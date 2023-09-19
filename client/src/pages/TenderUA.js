@@ -8,6 +8,7 @@ import Pages from "../components/Pages";
 import { observer } from "mobx-react-lite";
 import { Context } from "../index";
 import { fetchTypesTender, fetchTenders } from "../http/tenderAPI";
+import NavBar from "../components/NavBar";
 
 const TenderUA = observer(() => {
   const { tender } = useContext(Context);
@@ -30,6 +31,7 @@ const TenderUA = observer(() => {
 
   return (
     <Container>
+      {/* <NavBar /> */}
       <Row className="mt-2">
         <Col md={3}>
           <TypeBar />

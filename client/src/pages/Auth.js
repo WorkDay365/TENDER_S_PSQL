@@ -20,16 +20,23 @@ const Auth = observer(() => {
   const isLogin = location.pathname === LOGIN_ROUTE;
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [emailReserv, setEmailRezerv] = useState("");
+  const [passwordDuble, setPasswordDuble] = useState("");
 
   const click = async () => {
     try {
+      console.log(email, password, emailReserv);
       let data;
       if (isLogin) {
-        data = await login(email, password);
+        data = await login(email, password, emailReserv);
       } else {
-        data = await registration(email, password);
+        data = await registration(email, password, emailReserv);
       }
+      console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!  data req.body");
       console.log(data);
+      console.log("!!!!!!!!!!!!!!!!!!!!!!!!");
+      console.log(user);
+      console.log("!!!!!!!!!!!!!!!!!!!!!!!!");
       user.setUser(user);
       user.setIsAuth(true);
       history.push(TENDERUA_ROUTE);
@@ -52,6 +59,15 @@ const Auth = observer(() => {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
+          {!isLogin && (
+            <Form.Control
+              checked={false}
+              className="mt-3"
+              placeholder="Введіть Вашу резервну пошту..."
+              value={emailReserv}
+              onChange={(e) => setEmailRezerv(e.target.value)}
+            />
+          )}
           <Form.Control
             className="mt-3"
             placeholder="Введіть Ваш пароль..."
@@ -59,6 +75,15 @@ const Auth = observer(() => {
             onChange={(e) => setPassword(e.target.value)}
             type="password"
           />
+          {!isLogin && (
+            <Form.Control
+              className="mt-3"
+              value={passwordDuble}
+              placeholder="Введіть Ваш пароль повторно..."
+              onChange={(e) => setPasswordDuble(e.target.value)}
+              type="password"
+            />
+          )}
           <Row className="d-flex justify-content-between mt-3 pl-3 pr-3">
             {isLogin ? (
               <div>

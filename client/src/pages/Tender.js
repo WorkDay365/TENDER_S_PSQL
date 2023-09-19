@@ -49,7 +49,7 @@ const Tender = () => {
           // style={{width: 300, height: 300, fontSize: 32, border: '5px solid lightgray'}}
           >
             {/* <h3>От: {tender.price} руб.</h3> */}
-            <h3>Від: 200 000 грн.</h3>
+            {/* <h3>Від: 200 000 грн.</h3> */}
             <Button variant={"outline-dark"}>Додати в кабінет</Button>
           </Card>
         </Col>
@@ -64,6 +64,22 @@ const Tender = () => {
                         {info.title}: {info.description}
                     </Row>
                 )} */}
+      </Row>
+      <Row className="d-flex flex-column m-3">
+        <h1>Роботи які треба виконати</h1>
+        <div> Опис роботи : Об'єм роботи : Вартість роботи </div>
+        {tender.info.map((info, index) => (
+          <Row
+            key={info.id}
+            style={{
+              background: index % 2 === 0 ? "lightgray" : "transparent",
+              padding: 10,
+            }}
+          >
+            {" "}
+            {info.title}: {info.description} : {info.coast}
+          </Row>
+        ))}
       </Row>
     </Container>
   );
