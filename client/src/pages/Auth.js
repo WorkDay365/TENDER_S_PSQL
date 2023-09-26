@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { Alert, Container, Form } from "react-bootstrap";
+import { Alert, Container, Form, Col } from "react-bootstrap";
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 import Row from "react-bootstrap/Row";
@@ -65,7 +65,7 @@ const Auth = observer(() => {
   const [password, setPassword] = useState("");
   const [title, setTitle] = useState("");
   const [emailReserv, setEmailRezerv] = useState("");
-
+  const [typeCompany, setTypeCompany] = useState("");
   const [passwordDuble, setPasswordDuble] = useState("");
 
   const click = async () => {
@@ -73,18 +73,20 @@ const Auth = observer(() => {
       console.log(email, password, emailReserv);
       let data;
       if (isLogin) {
-        data = await login(email, password, emailReserv);
+        data = await login(email, password, emailReserv, title);
       } else {
         if (password !== passwordDuble) {
           Alert("Паролі не збігаються... перевірте");
           return;
         }
-        data = await registration(strRegNum, password, emailReserv);
+        console.log("title", title);
+        data = await registration(strRegNum, password, emailReserv, title);
       }
       console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!  data req.body");
       console.log(data);
       console.log("!!!!!!!!!!!!!!!!!!!!!!!!");
       console.log(user);
+
       console.log("!!!!!!!!!!!!!!!!!!!!!!!!");
       user.setUser(user);
       user.setIsAuth(true);
@@ -94,6 +96,7 @@ const Auth = observer(() => {
     }
   };
 
+  console.log("type  ", typeCompany);
   // email = strRegNum;
 
   return (
@@ -106,11 +109,41 @@ const Auth = observer(() => {
         <h6 className="m-auto">.</h6>
         <h6 className="m-auto">{isLogin ? "" : `Ваш реєстраційний номер: `}</h6>
         <h4 className="m-auto">{isLogin ? "" : <div>{strRegNum}</div>}</h4>
+
         <Form className="d-flex flex-column">
+          {/* {["radio"].map((typeCompany) => (
+            <div key={`inline-${typeCompany}`} className="mb-3">
+              <Form.Check
+                inline
+                label="1"
+                type={typeCompany}
+                id={`inline-${typeCompany}-1`}
+                value={1}
+                onChange={(e) => setTypeCompany(e.target.value)}
+              />
+              <Form.Check
+                inline
+                label="2"
+                type={typeCompany}
+                id={`inline-${typeCompany}-2`}
+                value={2}
+                onChange={(e) => setTypeCompany(e.target.value)}
+              />
+              <Form.Check
+                inline
+                label="3 (disabled)"
+                type={typeCompany}
+                id={`inline-${typeCompany}-3`}
+                value={3}
+                onChange={(e) => setTypeCompany(e.target.value)}
+              />
+            </div>
+          ))} */}
+
           {!isLogin && (
             <Form.Control
               className="mt-3"
-              placeholder="Введіть Вашу назву..."
+              placeholder="Введіть Вашу назву (ПІБ/ФОП/ТОВ)..."
               value={title}
               onChange={(e) => setTitle(e.target.value)}
             />
