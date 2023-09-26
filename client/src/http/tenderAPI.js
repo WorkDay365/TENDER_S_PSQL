@@ -32,6 +32,12 @@ export const createTender = async (tender) => {
   return data;
 };
 
+export const createTender2 = async (tender) => {
+  const { data } = await $authHost.post("api/tender2", tender);
+
+  return data;
+};
+
 export const fetchTenders = async (typeTenderId, page, limit = 3) => {
   const { data } = await $host.get("api/tender", {
     params: {

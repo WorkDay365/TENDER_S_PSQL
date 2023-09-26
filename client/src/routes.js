@@ -7,6 +7,7 @@ import Test from "./pages/test";
 import Settings from "./pages/Settings";
 import Created from "./pages/Created";
 import Selected from "./pages/Selected";
+import Tender2 from "./pages/Tender2";
 import {
   TEST_ROUTE,
   ADMIN_ROUTE,
